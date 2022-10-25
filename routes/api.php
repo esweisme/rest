@@ -26,6 +26,7 @@ Route::middleware('api')->group(function () {
     Route::middleware('jwt.auth')->group(function () {
 
         Route::get('/profil', [App\Http\Controllers\UserController::class, 'show']);
+        Route::post('/tutorial', [App\Http\Controllers\TutorialController::class, 'create']);
 
     });
  
