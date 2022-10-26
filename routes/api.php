@@ -22,12 +22,20 @@ Route::middleware('api')->group(function () {
     
     Route::post('/auth/signup', [App\Http\Controllers\AuthController::class, 'signup']);
     Route::post('/auth/signin', [App\Http\Controllers\AuthController::class, 'signin']);
+    
+    Route::get('/tutorial', [App\Http\Controllers\TutorialController::class, 'index']);
+    Route::get('/tutorial/{id}', [App\Http\Controllers\TutorialController::class, 'show']);
 
     Route::middleware('jwt.auth')->group(function () {
 
+        //tutorial
         Route::get('/profil', [App\Http\Controllers\UserController::class, 'show']);
-        Route::post('/tutorial', [App\Http\Controllers\TutorialController::class, 'create']);
+        Route::post('/tutorial', [App\Http\Controllers\TutorialController::class, 'store']);
+        Route::put('/tutorial/{id}', [App\Http\Controllers\TutorialController::class, 'update']);
+        Route::delete('/tutorial/{id}', [App\Http\Controllers\TutorialController::class, 'destroy']);
 
+        //komentar tutorial
+        Route::post('/comment/{tut_id}', [App\Http\Controllers\CommentController::class, 'store']);
     });
  
 });
